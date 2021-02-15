@@ -13,6 +13,5 @@ func main() {
 	p := perimeter / 2
 	d := p * (p - a) * (p - b) * (p - c)
 	s := math.Sqrt(float64(d))
-	fmt.Println(perimeter)
-	fmt.Println(s)
+	fmt.Println(perimeter, s)
 }
