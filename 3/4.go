@@ -9,7 +9,7 @@ func main() {
 	fmt.Scanf("%d", &price)
 	r := float64(price / month)
 	s := float64(salary) * 0.5
-	if s > r {
+	if s >= r {
 		fmt.Println("YES")
 	} else {
 		fmt.Println("NO")
