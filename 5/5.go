@@ -11,7 +11,7 @@ func main() {
 		fmt.Scanf("%d", &a)
 		arr[i] = a
 	}
-	maxi := 0
+	maxi := arr[0]
 	//20 30 40 50 60
 	//20 30 -> 30
 	//30 40 -> 40
