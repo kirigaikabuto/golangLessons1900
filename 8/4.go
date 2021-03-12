@@ -23,6 +23,16 @@ func getMax(a []int) (int, int) {
 	return maxi, mini
 }
 
+func getAvg(a []int) int {
+	sumi := 0
+	avg := 0
+	for i := 0; i < len(a); i++ {
+		sumi += a[i]
+	}
+	avg = sumi / len(a)
+	return avg
+}
+
 func main() {
 	arr1 := []int{1, 2, 3, 4}
 	arr2 := []int{4, 5, 6, 2, 323, 23, 4, 232}
