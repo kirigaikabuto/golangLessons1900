@@ -4,9 +4,11 @@ import "fmt"
 
 func main() {
 	a := [][]int{}
-	//0 0 0
-	//0 0 0
-	//0 0 0
-	//0 0 0
-	fmt.Println(a)
+	for i := 0; i < 4; i++ {
+		arr := []int{1, 1, 1, 1}
+		a = append(a, arr)
+	}
+	for _, v := range a {
+		fmt.Println(v)
+	}
 }
