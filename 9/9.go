@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func createTwoDimensionalArray(rows, columns, randomRange int) [][]int {
+func CreateTwoDimensionalArray(rows, columns, randomRange int) [][]int {
 	arr := [][]int{}
 	//code
 	for i := 0; i < rows; i++ {
@@ -36,7 +36,7 @@ func CreateArray(n, randomRange int) []int {
 }
 
 func main() {
-	arr := createTwoDimensionalArray(3, 4, 20)
+	arr := CreateTwoDimensionalArray(3, 4, 20)
 	for _, v := range arr {
 		fmt.Println(v)
 	}
