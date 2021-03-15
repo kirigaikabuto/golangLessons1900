@@ -6,6 +6,23 @@ import (
 	"time"
 )
 
+func createTwoDimensionalArray(rows, columns, randomRange int) [][]int {
+	arr := [][]int{}
+	//code
+	for i := 0; i < rows; i++ {
+		a := []int{}
+		for j := 0; j < columns; j++ {
+			//create random number
+			k := rand.Intn(randomRange)
+			//add elements to the nested array
+			a = append(a, k)
+		}
+		//add array into arr array
+		arr = append(arr, a)
+	}
+	return arr
+}
+
 func CreateArray(n, randomRange int) []int {
 	//тут мы генерируем числа для рандома что он заполнился числами
 	rand.Seed(time.Now().UnixNano())
@@ -19,6 +36,8 @@ func CreateArray(n, randomRange int) []int {
 }
 
 func main() {
-	arr := CreateArray(20, 10)
-	fmt.Println(arr)
+	arr := createTwoDimensionalArray(3, 4, 20)
+	for _, v := range arr {
+		fmt.Println(v)
+	}
 }
