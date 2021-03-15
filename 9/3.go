@@ -14,8 +14,7 @@ func main() {
 	twoArr := [][]int{
 		{1, 2, 3}, {4, 5, 6}, {7, 8, 9},
 	}
-	fmt.Println(twoArr[1][1])
-	fmt.Println(twoArr[0][2])
+	fmt.Println(len(twoArr))
 	//1
 	//4
 	//8
