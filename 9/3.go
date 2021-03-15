@@ -11,9 +11,7 @@ func main() {
 	//1  4 5 6
 	//2  7 8 9
 	twoArr := [][]int{
-		{1, 2, 3},
-		{4, 5, 6},
-		{7, 8, 9},
+		{1, 2, 3}, {4, 5, 6}, {7, 8, 9},
 	}
 	fmt.Println(twoArr[1][1])
 	fmt.Println(twoArr[0][2])
