@@ -16,10 +16,12 @@ func main() {
 	//	}
 	//}
 	sumi := 0
-	for _, v := range twoArr {
-		for _, k := range v {
+	for i, v := range twoArr {
+		for l, k := range v {
 			sumi += k
+			twoArr[i][l] = 0
 		}
 	}
 	fmt.Println(sumi)
+	fmt.Println(twoArr)
 }
