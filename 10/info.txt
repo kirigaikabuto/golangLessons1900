@@ -7,3 +7,23 @@ price(float)
 4) вывести элементы массива(процедура)
 
 Название Книги: книга1, Цена: 30.5
+
+
+
+2) создать структура
+Student
+    FirstName string
+    LastName string
+    marks []int
+    getFullName() string
+    getAverageMark() int
+
+s1 = Student{
+    FirstName:"Yerassyl",
+    LastName:"Tleugazy",
+    marks: []int{1,2,3,4,5},
+}
+
+fmt.Println(s1.getFullName()) // Yerassyl Tleugazy
+fmt.Println(s1.getAverageMark()) // 3
+
