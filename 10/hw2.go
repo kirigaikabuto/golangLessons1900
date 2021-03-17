@@ -21,3 +21,6 @@ func main() {
 	}
 	fmt.Println(maxi)
 }
+// 1
+//4 2
+// 3
