@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 )
 
 //type название_структуры struct {
@@ -33,10 +32,17 @@ func main() {
 	//fmt.Println(reflect.TypeOf(b))
 	//fmt.Println(reflect.TypeOf(c))
 	//fmt.Println(reflect.TypeOf(d))
-	p := Person{"yerassyl", "tleugazy", 23}
+
+	//1) быстрое создание и инициализация
+	//p := Person{"yerassyl", "tleugazy", 23}
+	var p Person
 	fmt.Println(p.FirstName)
 	fmt.Println(p.LastName)
 	fmt.Println(p.Age)
-	fmt.Println(reflect.TypeOf(p))
-
+	p.FirstName = "asddassa"
+	p.LastName = "12321313123"
+	p.Age = 30
+	fmt.Println(p.FirstName)
+	fmt.Println(p.LastName)
+	fmt.Println(p.Age)
 }
