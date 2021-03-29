@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"os"
+	"io/ioutil"
 )
 
 //struct
@@ -31,31 +31,16 @@ func (st *Student) SetYear() {
 }
 
 func main() {
-	var st1 Student
-	st1 = Student{
-		FirstName: "Yerassyl",
-		LastName:  "Tleugazy",
-		Age:       23,
-	}
-	st2 := Student{
-		FirstName: "123231",
-		LastName:  "4123313",
-		Age:       123,
-	}
-	students := []Student{st1, st2}
-	fmt.Println(students)
-	//convert to json
-	studentsJson, err := json.Marshal(students)
+	data, err := ioutil.ReadFile("data.json")
 	if err != nil {
 		panic(err)
 	}
-	//write data to file
-	file, err := os.Create("data.json")
+	var students []Student
+	err = json.Unmarshal(data, &students)
 	if err != nil {
 		panic(err)
 	}
-	_, err = file.Write(studentsJson)
-	if err != nil {
-		panic(err)
+	for _, v := range students {
+		fmt.Println(v.FirstName)
 	}
 }
