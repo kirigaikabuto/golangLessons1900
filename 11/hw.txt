@@ -9,7 +9,7 @@ Client
     -DecreaseBalance(value int) -> уменьшить баланс на value
     -PrintAll() -> выводить данные о клиенте
 3) упаковать структуру в пакет models
-4) создать три файла increase.go, read.go, decrease.go, test_data.go
+4) создать 4 файла increase.go, read.go, decrease.go, test_data.go
 5) test.go
     создание данных клиента и запись их в массив
     массив преобразовать в json и записать в файл(clients.json)
