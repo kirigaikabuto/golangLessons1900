@@ -1,0 +1,31 @@
+1) создать структуру клиента банка
+Client
+    -Id:int
+    -FullName:string
+    -Balance:int
+2) создать методы для структуры
+Client
+    -IncreaseBalance(value int) -> увеличивать баланс на value
+    -DecreaseBalance(value int) -> уменьшить баланс на value
+    -PrintAll() -> выводить данные о клиенте
+3) упаковать структуру в пакет models
+4) создать три файла increase.go, read.go, decrease.go, test_data.go
+5) test.go
+    создание данных клиента и запись их в массив
+    массив преобразовать в json и записать в файл(clients.json)
+6) read.go
+    считывать данные из clients.json и выводить через цикл
+7) decrease.go
+    считывать данные из client.json и уменьшать balance каждого клиента на 100
+    и затем заново все записать в файл client.json
+8) increase.go
+
+Client1
+id:1
+FullName:"asdad",
+Balance:1000,
+
+go run test.go
+go run read.go -> увидеть данные о клиенте balance:1000
+go run decrease.go
+go run read.go ->  balance 900
