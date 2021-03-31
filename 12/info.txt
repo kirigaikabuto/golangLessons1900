@@ -1,0 +1,29 @@
+1) скачать репозиторий в go
+go get название_репозитория
+go get github.com/KenDaryn/Golang_HM
+FILE->OPEN->github.com -> KenDaryn -> Golang_HM
+
+2) после каких либо изменений залить все на гит
+ветка - branch
+git checkout -b versionYerassyl
+git add .
+git commit -m "sdsdsd"
+git push origin versionYerassyl
+
+3) если хочется пушить сразу в main
+git checkout main
+git pull origin main // мы проверяем версию с компа с тем что лежит на гите
+git add .
+git commit -m "sdsdsd"
+git push origin main / git push
+
+4) ситуация когда мы работаем на одним проектом необходимо
+4.1) необходимо убедиться в том что у вас последняя версия проекта
+git checkout main
+git pull origin main
+4.2) для каждого измнения в проекте делать ветку(branch) и только затем изменять существующий код
+git checkout -b branch123
+git add .
+git commit -m "Sdsdsdd"
+git push origin branch123
+4.3) создаем merge request
