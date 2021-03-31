@@ -27,3 +27,8 @@ git add .
 git commit -m "Sdsdsdd"
 git push origin branch123
 4.3) создаем merge request
+
+
+5) скачать репозиторий в go
+открыть в goland и создать папку под ваше имя и внутри папки создать 3 файла
+создать ветку залить и сделать merge request и поставить его на меня(assign)
