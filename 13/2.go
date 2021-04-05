@@ -6,7 +6,10 @@ import (
 	"log"
 	"os"
 )
-
+//go mod init
+//go get github.com/urfave/cli
+//go run 2.go -> hello from cli app
+//go run 2.go help
 func main() {
 	//создание приложения
 	app := cli.NewApp()
