@@ -17,9 +17,11 @@ func MainAction(c *cli.Context) error {
 	//var s string
 	//fmt.Scanf("%s", &s)
 	//fmt.Println(s)
+	//получение элемента который находится первым
 	a := c.Args().Get(0)
 	b := c.Args().Get(1)
 	if c.NArg() == 2 {
+		//перевод строки в число
 		num1, err := strconv.Atoi(a)
 		if err != nil {
 			return err
@@ -32,7 +34,6 @@ func MainAction(c *cli.Context) error {
 	} else {
 		return errors.New("count of arguments should be only 2")
 	}
-
 	return nil
 }
 
