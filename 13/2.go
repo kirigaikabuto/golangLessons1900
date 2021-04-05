@@ -23,6 +23,7 @@ func main() {
 		fmt.Println("hello from cli app")
 		return nil
 	}
+	//запуск приложения
 	err := app.Run(os.Args)
 	if err != nil{
 		log.Fatal(err)
