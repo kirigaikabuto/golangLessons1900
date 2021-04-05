@@ -9,4 +9,4 @@
 go run main.go calc -z=+ -n1=3 -n2=4
 
 2)ауидо плеер
-go run maing.o player -f=1.mp3
+go run main.go player -f=1.mp3
