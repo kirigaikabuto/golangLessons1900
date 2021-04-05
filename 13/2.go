@@ -18,9 +18,11 @@ func MainAction(c *cli.Context) error {
 	//fmt.Scanf("%s", &s)
 	//fmt.Println(s)
 	//получение элемента который находится первым
-	a := c.Args().Get(0)
-	b := c.Args().Get(1)
-	if c.NArg() == 2 {
+	znak := c.Args().Get(0)
+	a := c.Args().Get(1)
+	b := c.Args().Get(2)
+	if c.NArg() == 3 {
+		total := 0
 		//перевод строки в число
 		num1, err := strconv.Atoi(a)
 		if err != nil {
@@ -30,9 +32,16 @@ func MainAction(c *cli.Context) error {
 		if err != nil {
 			return err
 		}
-		fmt.Println(num1 + num2)
+		if znak == "+" {
+			total = num1 + num2
+		} else if znak == "-" {
+			total = num1 - num2
+		} else {
+			return errors.New("first argument should be + or -")
+		}
+		fmt.Println(total)
 	} else {
-		return errors.New("count of arguments should be only 2")
+		return errors.New("count of arguments should be only 3")
 	}
 	return nil
 }
