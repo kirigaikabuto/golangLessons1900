@@ -16,7 +16,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = yt.StartDownload(pathDir, "1.mp4", "high", 0)
+	fileName := yt.Author + "_" + yt.Title + ".mp4"
+	err = yt.StartDownload(pathDir, fileName, "high", 0)
 	if err != nil {
 		log.Fatal(err)
 	}
