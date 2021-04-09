@@ -11,7 +11,7 @@ var (
 	path     string
 	a        int
 	b        int
-	twoFlags []cli.Flag = []cli.Flag{
+	twoFlags = []cli.Flag{
 		cli.IntFlag{
 			Name:        "a",
 			Value:       0,
