@@ -1,1 +1,6 @@
-go run test_youtube.go -p=C:\Users\77086\Desktop\gm get -i=https://torrent5.net/uploads/posts/2020-11/1604354800_16059de7b96cfefa_1920xh.jpg
+1) go run test_youtube.go -p=C:\Users\77086\Desktop\gm get -i=https://torrent5.net/uploads/posts/2020-11/1604354800_16059de7b96cfefa_1920xh.jpg
+
+2) web parsing почитать что это
+http://go-colly.org/
+
+3) попробовать получить ссылки из всех картинок которые есть на каком либо веб сайте
