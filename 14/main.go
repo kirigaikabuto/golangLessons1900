@@ -8,9 +8,21 @@ import (
 )
 
 var (
-	path string
-	a    int
-	b    int
+	path     string
+	a        int
+	b        int
+	twoFlags []cli.Flag = []cli.Flag{
+		cli.IntFlag{
+			Name:        "a",
+			Value:       0,
+			Destination: &a,
+		},
+		cli.IntFlag{
+			Name:        "b",
+			Value:       0,
+			Destination: &b,
+		},
+	}
 )
 
 func mainAction(c *cli.Context) error {
@@ -28,6 +40,11 @@ func plusAction(c *cli.Context) error {
 	return nil
 }
 
+func minusAction(c *cli.Context) error {
+	fmt.Println(a - b)
+	return nil
+}
+
 func main() {
 	app := cli.NewApp()
 	app.Name = "App for downloading video"
@@ -38,16 +55,6 @@ func main() {
 			Name:        "path,p",
 			Value:       "default path",
 			Destination: &path,
-		},
-		cli.IntFlag{
-			Name:        "a",
-			Value:       0,
-			Destination: &a,
-		},
-		cli.IntFlag{
-			Name:        "b",
-			Value:       0,
-			Destination: &b,
 		},
 	}
 	app.Commands = []cli.Command{
@@ -62,6 +69,14 @@ func main() {
 			Aliases: []string{"+"},
 			Usage:   "for calculate two numbers",
 			Action:  plusAction,
+			Flags:   twoFlags,
+		},
+		{
+			Name:    "minus",
+			Aliases: []string{"-"},
+			Usage:   "for calculate two numbers",
+			Action:  minusAction,
+			Flags:   twoFlags,
 		},
 	}
 	app.Action = mainAction
