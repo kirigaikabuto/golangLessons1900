@@ -33,6 +33,6 @@ func main() {
 	//connect to database
 	db := client.Database(cf.Database)
 	//connect to table/collection
-	collection := db.Collection("users")
+	collection := db.CreateCollection(context.TODO(), "users")
 	fmt.Println(collection)
 }
