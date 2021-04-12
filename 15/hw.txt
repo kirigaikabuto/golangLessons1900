@@ -1,0 +1,6 @@
+database: online_shop
+collection: products
+Product
+    name:string
+    price:float64
+    description:string
