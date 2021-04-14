@@ -11,7 +11,6 @@ import (
 )
 
 var (
-	id            = 0
 	usersStore    *users.UsersStore
 	err           error
 	username      string
@@ -52,7 +51,6 @@ func loginAction(c *cli.Context) error {
 		}
 	}
 	if isExist {
-		id = user.Id
 		fmt.Printf("Welcome %d", user.Id)
 	} else {
 		log.Fatal(errors.New("no user by this username and password"))
