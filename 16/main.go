@@ -1,57 +1,41 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"github.com/kirigaikabuto/golangLessons1900/16/config"
-	models "github.com/kirigaikabuto/golangLessons1900/16/users"
+	"github.com/kirigaikabuto/golangLessons1900/16/users"
 	"log"
 )
 
 func main() {
-	fmt.Println("123213")
 	cf := config.MongoConfig{
 		Host:           "localhost",
 		Port:           "27017",
 		Database:       "testdb",
 		CollectionName: "users",
 	}
-	usersStore, err := models.NewUsersStore(cf)
+	username := "123231"
+	password := "12323213"
+	user := users.User{
+		Username: username,
+		Password: password,
+	}
+	usersStore, err := users.NewUsersStore(cf)
 	if err != nil {
 		log.Fatal(err)
 	}
-	user1 := models.User{
-		Id:       661,
-		Username: "1111111111111",
+	usersData, err := usersStore.List()
+	isExist := false
+	for _, v := range usersData {
+		if v.Username == user.Username && v.Password == v.Password {
+			user = v
+			isExist = true
+		}
 	}
-	err = usersStore.Update(user1)
-	if err != nil {
-		log.Fatal(err)
-	}
-	oneUser, err := usersStore.GetById(661)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(oneUser)
-	err = usersStore.Delete(661)
-	if err != nil {
-		log.Fatal(err)
-	}
-	oneUser, err = usersStore.GetById(661)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(oneUser)
-	err = usersStore.AddUser(user1)
-	if err != nil {
-		log.Fatal(err)
-	}
-	oneUser, err = usersStore.GetById(661)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(oneUser)
-	users, err := usersStore.List()
-	for _, v := range users {
-		fmt.Println(v)
+	if isExist {
+		fmt.Printf("Welcome %d", user.Id)
+	} else {
+		log.Fatal(errors.New("no user by this username and password"))
 	}
 }
