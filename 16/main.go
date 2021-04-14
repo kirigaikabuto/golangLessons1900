@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	fmt.Println("asdsad")
 	cf := config.MongoConfig{
 		Host:           "localhost",
 		Port:           "27017",
