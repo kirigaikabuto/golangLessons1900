@@ -40,17 +40,17 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(oneUser)
-	//err = usersStore.AddUser(user1)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//oneUser, err := usersStore.GetById(661)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//fmt.Println(oneUser)
-	//users, err := usersStore.List()
-	//for _, v := range users {
-	//	fmt.Println(v)
-	//}
+	err = usersStore.AddUser(user1)
+	if err != nil {
+		log.Fatal(err)
+	}
+	oneUser, err = usersStore.GetById(661)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(oneUser)
+	users, err := usersStore.List()
+	for _, v := range users {
+		fmt.Println(v)
+	}
 }
