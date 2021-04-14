@@ -19,15 +19,38 @@ func main() {
 		log.Fatal(err)
 	}
 	user1 := models.User{
-		Username: "123231",
-		Password: "12323213",
+		Id:       661,
+		Username: "1111111111111",
 	}
-	err = usersStore.AddUser(user1)
+	err = usersStore.Update(user1)
 	if err != nil {
 		log.Fatal(err)
 	}
-	users, err := usersStore.List()
-	for _, v := range users {
-		fmt.Println(v)
+	oneUser, err := usersStore.GetById(661)
+	if err != nil {
+		log.Fatal(err)
 	}
+	fmt.Println(oneUser)
+	err = usersStore.Delete(661)
+	if err != nil {
+		log.Fatal(err)
+	}
+	oneUser, err = usersStore.GetById(661)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(oneUser)
+	//err = usersStore.AddUser(user1)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//oneUser, err := usersStore.GetById(661)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//fmt.Println(oneUser)
+	//users, err := usersStore.List()
+	//for _, v := range users {
+	//	fmt.Println(v)
+	//}
 }
