@@ -41,3 +41,7 @@ func (mp *mongoProductStore) CreateProduct(product *Product) (*Product, error) {
 func (mp *mongoProductStore) GetProduct(id int64) (*Product, error) {
 	return nil, nil
 }
+
+func (mp *mongoProductStore) GetProduct123(id int64) (*Product, error) {
+	return nil, nil
+}
