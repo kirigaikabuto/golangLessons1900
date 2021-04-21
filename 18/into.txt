@@ -38,3 +38,10 @@ response status
 
 
 http://jsonplaceholder.typicode.com
+
+разрешенный ресурсы
+/login -> POST -> (username,password) -> ACCESS_KEY
+/register -> POST -> (username,password,first_name) ->
+
+ресурсы требующие доступ
+/data -> GET Headers(ACCESS_KEY) -> доступ
