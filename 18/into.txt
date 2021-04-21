@@ -1,0 +1,40 @@
+vk.com -> доменное имя (домен) vk .com
+    vk -> ip address 73.21.32.53
+
+https://vk.com/feed -> главная панель
+https://vk.com/kirigai98 -> профиль
+https://vk.com/audios225505765 -> музыка
+
+front end -> клиентская часть
+
+client->(username,password) ->  server
+server ->(username,password,firsT_name,last_name,musics) || error -> client
+
+-> http
+
+http
+    ->method: GET,POST,DELETE,PATCH,PUT
+
+GET -> переход по ссылке и отображение какого либо контента (внешнего канала общения)
+все данные передаются в ссылке ввиде ? &
+
+POST -> формы авторизации и регистрации (канал внутреннего общения)
+все передается в body
+
+method: get || post
+body: post
+parameters: get and post
+headers: get and post
+
+headers -> здесь хранится информация типо в каком языке подать ответ или же хранятся ключи которые позволяют получитть доступ
+к ресурсу
+
+
+response status
+200 -> все хорошо
+404 -> не найдено
+500 -> ошибка в ответе
+201 -> событие создалось(POST)
+
+
+http://jsonplaceholder.typicode.com
