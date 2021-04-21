@@ -45,3 +45,8 @@ http://jsonplaceholder.typicode.com
 
 ресурсы требующие доступ
 /data -> GET Headers(ACCESS_KEY) -> доступ
+
+
+/   -> Привет это главная страница
+/contacts -> 87086394516
+/work -> SetDataAcademy
