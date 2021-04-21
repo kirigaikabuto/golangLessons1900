@@ -1,0 +1,12 @@
+1) доделать /calculate
+/calculate?a=3&b=4&znak=+
+
+2) для модели продуктов сделать
+Product {
+    id:int
+    name:string
+    price:int
+}
+/products -> [product1,product2,product3]
+
+/products?id=1 [product1]
