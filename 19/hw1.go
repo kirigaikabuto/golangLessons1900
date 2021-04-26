@@ -13,11 +13,6 @@ type Product struct {
 	Name  string `json:"name"`
 	Price int    `json:"price"`
 }
-
-func MainPage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello from main page, mate!")
-}
-
 func CalcPage(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
@@ -79,7 +74,6 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
 	if cInt > 3 {
 		JsonResponse(w, "no data")
 		return
@@ -88,7 +82,6 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 		JsonResponse(w, products[cInt-1])
 		return
 	}
-
 }
 
 func JsonResponse(w http.ResponseWriter, value interface{}) {
