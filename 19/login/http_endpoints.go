@@ -14,10 +14,11 @@ type HttpEndpoints interface {
 
 type loginHttpEndpointsStruct struct {
 	//connection to database
+	db UsersStore
 }
 
-func NewLoginHttpEndpoints(cf Config) HttpEndpoints {
-	return &loginHttpEndpointsStruct{}
+func NewLoginHttpEndpoints(mongoConnect UsersStore) HttpEndpoints {
+	return &loginHttpEndpointsStruct{db: mongoConnect}
 }
 
 func (lh *loginHttpEndpointsStruct) MainPage(w http.ResponseWriter, r *http.Request) {
@@ -77,6 +78,13 @@ func (lh *loginHttpEndpointsStruct) TemplateExample(w http.ResponseWriter, r *ht
 			tp.Error = "please write password"
 		}
 		fmt.Println("data from login ", name, password)
+		err = lh.db.AddUser(User{
+			Username: name,
+			Password: password,
+		})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
 		err = templateFile.Execute(w, tp)
 		if err != nil {
 			http.Error(w, "execute error", http.StatusInternalServerError)

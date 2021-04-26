@@ -9,3 +9,10 @@ type TemplateResponse struct {
 	Price       int
 	Error       string
 }
+
+type MongoConfig struct {
+	Host           string
+	Port           string
+	Database       string
+	CollectionName string
+}
