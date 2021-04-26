@@ -10,6 +10,7 @@ import (
 type HttpEndpoints interface {
 	MainPage(w http.ResponseWriter, r *http.Request)
 	TemplateExample(w http.ResponseWriter, r *http.Request)
+	GetUsersList(w http.ResponseWriter, r *http.Request)
 }
 
 type loginHttpEndpointsStruct struct {
@@ -91,5 +92,22 @@ func (lh *loginHttpEndpointsStruct) TemplateExample(w http.ResponseWriter, r *ht
 			return
 		}
 	}
+}
 
+func (lh *loginHttpEndpointsStruct) GetUsersList(w http.ResponseWriter, r *http.Request) {
+	templateFile, err := template.ParseFiles("templates/users_list.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	users, err := lh.db.List()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	tp := &ListUserResponse{UserField: users[0]}
+	err = templateFile.Execute(w, tp)
+	if err != nil {
+		http.Error(w, "execute error", http.StatusInternalServerError)
+		return
+	}
 }
