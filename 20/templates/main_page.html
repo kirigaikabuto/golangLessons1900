@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body>
+<a href="/add_page">Add Page</a>
+{{range .Movies}}
+<p>{{.Id}}</p>
+<p><a href="/detail_page?id={{.Id}}">{{.Name}}</a></p>
+<hr>
+{{end}}
+</body>
+</html>

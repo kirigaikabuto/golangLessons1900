@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Page</title>
+</head>
+<body>
+<a href="/">Main page</a>
+<form method="post" action="/add_page_action">
+    <p>Name: <input type="text" name="name"></p>
+    <p>Description: <input type="text" name="description"></p>
+    <p>ImageUrl: <input type="text" name="image_url"></p>
+    <input type="submit" value="create">
+</form>
+<p>{{.Error}}</p>
+</body>
+</html>
