@@ -1,1 +1,16 @@
 go get github.com/gorilla/mux
+
+Current
+
+http endpoints(external)
+        |
+      store
+
+
+Furute
+
+http endpoints(external)
+        |
+     service(сбор недостающих данных и их проверка и обработка
+        |
+      store
