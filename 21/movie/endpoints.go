@@ -14,6 +14,7 @@ type HttpEndpoints interface {
 	AddPage() func(w http.ResponseWriter, r *http.Request)
 	AddPageAction() func(w http.ResponseWriter, r *http.Request)
 	DetailPage(idParam string) func(w http.ResponseWriter, r *http.Request)
+	DeleteAction(idParam string) func(w http.ResponseWriter, r *http.Request)
 }
 
 type httpEndpoints struct {
@@ -100,7 +101,7 @@ func (h *httpEndpoints) AddPage() func(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *httpEndpoints) AddPageAction() func (w http.ResponseWriter, r *http.Request) {
+func (h *httpEndpoints) AddPageAction() func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		err := r.ParseForm()
 		if err != nil {
@@ -131,5 +132,26 @@ func (h *httpEndpoints) AddPageAction() func (w http.ResponseWriter, r *http.Req
 		}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
+	}
+}
+
+func (h *httpEndpoints) DeleteAction(idParam string) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		idStr, ok := vars[idParam]
+		if !ok {
+			http.Error(w, "Please write parameter id", http.StatusInternalServerError)
+		}
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		err = h.db.Delete(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 }
