@@ -74,3 +74,17 @@ func (m *movieStore) Get(id int) (*Movie, error) {
 	}
 	return movie, nil
 }
+
+func (m *movieStore) Update(movie *Movie) (*Movie, error) {
+	filter := bson.D{{"id", movie.Id}}
+	updateDoc := bson.D{{"$set", bson.D{
+		{"name", movie.Name},
+		{"description", movie.Description},
+		{"image_url", movie.ImageUrl},
+	}}}
+	_, err := m.collection.UpdateOne(context.TODO(), filter, updateDoc)
+	if err != nil {
+		return nil, err
+	}
+	return movie, nil
+}

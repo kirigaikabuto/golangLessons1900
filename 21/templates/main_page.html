@@ -8,7 +8,7 @@
 <a href="/add_page">Add Page</a>
 {{range .Movies}}
 <p>{{.Id}}</p>
-<p><a href="/detail_page/{{.Id}}">{{.Name}}</a> <a href="/delete/{{.Id}}" style="float:right;">X</a></p>
+<p><a href="/detail_page/{{.Id}}">{{.Name}}</a> <a href="/update_page/{{.Id}}" style="float:right;margin-left: 10px;">Edit</a>   <a href="/delete/{{.Id}}" style="float:right;">X</a></p>
 <hr>
 {{end}}
 </body>

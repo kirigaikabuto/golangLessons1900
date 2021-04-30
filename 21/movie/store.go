@@ -5,4 +5,5 @@ type MovieStore interface {
 	Delete(id int) error
 	List() ([]Movie, error)
 	Get(id int) (*Movie, error)
+	Update(movie *Movie) (*Movie, error)
 }

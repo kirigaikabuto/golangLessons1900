@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Page</title>
+</head>
+<body>
+
+
+
+
+<form method="POST" action="/update_page_action/{{.Movie.Id}}">
+    <p>Name: <input type="text" name="name" value="{{.Movie.Name}}"></p>
+    <p>Description: <input type="text" name="description" value="{{.Movie.Description}}"></p>
+    <p>ImageUrl: <input type="text" name="image_url" value="{{.Movie.ImageUrl}}"></p>
+    <input type="submit" value="update">
+</form>
+</body>
+</html>

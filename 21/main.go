@@ -26,6 +26,8 @@ func main() {
 	router.Methods("POST").Path("/add_page_action").HandlerFunc(httpEndpoints.AddPageAction())
 	router.Methods("GET").Path("/detail_page/{id}").HandlerFunc(httpEndpoints.DetailPage("id"))
 	router.Methods("GET").Path("/delete/{idParam}").HandlerFunc(httpEndpoints.DeleteAction("idParam"))
+	router.Methods("GET").Path("/update_page/{id}").HandlerFunc(httpEndpoints.UpdatePage("id"))
+	router.Methods("POST").Path("/update_page_action/{id}").HandlerFunc(httpEndpoints.UpdatePageAction("id"))
 	fmt.Println("server is running on port 8080")
 	http.ListenAndServe(":8080", router)
 }

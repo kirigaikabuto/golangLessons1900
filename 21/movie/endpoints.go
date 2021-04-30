@@ -21,6 +21,9 @@ type HttpEndpoints interface {
 	DetailPage(idParam string) func(w http.ResponseWriter, r *http.Request)
 
 	DeleteAction(idParam string) func(w http.ResponseWriter, r *http.Request)
+
+	UpdatePage(idParam string) func(w http.ResponseWriter, r *http.Request)
+	UpdatePageAction(idParam string) func(w http.ResponseWriter, r *http.Request)
 }
 
 type httpEndpoints struct {
@@ -65,23 +68,23 @@ func (h *httpEndpoints) DetailPage(idParam string) func(w http.ResponseWriter, r
 
 func (h *httpEndpoints) MainPage() func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		//templateFile, err := template.ParseFiles("templates/main_page.html")
-		//if err != nil {
-		//	http.Error(w, err.Error(), http.StatusInternalServerError)
-		//	return
-		//}
+		templateFile, err := template.ParseFiles("templates/main_page.html")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 		movies, err := h.db.List()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		response := &MainPageResponse{Movies: movies}
-		respondJSON(w, 200, response)
-		//err = templateFile.Execute(w, response)
-		//if err != nil {
-		//	http.Error(w, err.Error(), http.StatusInternalServerError)
-		//	return
-		//}
+		//respondJSON(w, 200, response)
+		err = templateFile.Execute(w, response)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 	}
 }
 
@@ -190,5 +193,73 @@ func (h *httpEndpoints) MainPageAction() func(w http.ResponseWriter, r *http.Req
 			return
 		}
 		respondJSON(w, http.StatusCreated, movie)
+	}
+}
+
+func (h *httpEndpoints) UpdatePage(idParam string) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		idStr, ok := vars[idParam]
+		if !ok {
+			http.Error(w, "Please write parameter id", http.StatusInternalServerError)
+		}
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		templateFile, err := template.ParseFiles("templates/update_page.html")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		movie, err := h.db.Get(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		fmt.Println(movie)
+		response := &DetailPageResponse{Movie: *movie}
+		err = templateFile.Execute(w, response)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}
+}
+
+func (h *httpEndpoints) UpdatePageAction(idParam string) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		idStr, ok := vars[idParam]
+		if !ok {
+			http.Error(w, "Please write parameter id", http.StatusInternalServerError)
+		}
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		err = r.ParseForm()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		name := r.Form.Get("name")
+		description := r.Form.Get("description")
+		imageUrl := r.Form.Get("image_url")
+		movie := &Movie{
+			Id:          id,
+			Name:        name,
+			Description: description,
+			ImageUrl:    imageUrl,
+		}
+		movie, err = h.db.Update(movie)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
 	}
 }
