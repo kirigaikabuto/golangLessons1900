@@ -1,9 +1,11 @@
 package movie
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
 	"html/template"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -11,9 +13,13 @@ import (
 
 type HttpEndpoints interface {
 	MainPage() func(w http.ResponseWriter, r *http.Request)
+	MainPageAction() func(w http.ResponseWriter, r *http.Request)
+
 	AddPage() func(w http.ResponseWriter, r *http.Request)
 	AddPageAction() func(w http.ResponseWriter, r *http.Request)
+
 	DetailPage(idParam string) func(w http.ResponseWriter, r *http.Request)
+
 	DeleteAction(idParam string) func(w http.ResponseWriter, r *http.Request)
 }
 
@@ -59,22 +65,23 @@ func (h *httpEndpoints) DetailPage(idParam string) func(w http.ResponseWriter, r
 
 func (h *httpEndpoints) MainPage() func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		templateFile, err := template.ParseFiles("templates/main_page.html")
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
+		//templateFile, err := template.ParseFiles("templates/main_page.html")
+		//if err != nil {
+		//	http.Error(w, err.Error(), http.StatusInternalServerError)
+		//	return
+		//}
 		movies, err := h.db.List()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		response := &MainPageResponse{Movies: movies}
-		err = templateFile.Execute(w, response)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
+		respondJSON(w, 200, response)
+		//err = templateFile.Execute(w, response)
+		//if err != nil {
+		//	http.Error(w, err.Error(), http.StatusInternalServerError)
+		//	return
+		//}
 	}
 }
 
@@ -153,5 +160,35 @@ func (h *httpEndpoints) DeleteAction(idParam string) func(w http.ResponseWriter,
 			return
 		}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+}
+
+func respondJSON(w http.ResponseWriter, status int, payload interface{}) {
+	response, err := json.Marshal(payload)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	w.Write([]byte(response))
+}
+
+func (h *httpEndpoints) MainPageAction() func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		movie := &Movie{}
+		bodyJson, err := ioutil.ReadAll(r.Body)
+		err = json.Unmarshal(bodyJson, &movie)
+		if err != nil {
+			respondJSON(w, http.StatusInternalServerError, err)
+			return
+		}
+		movie, err = h.db.Create(movie)
+		if err != nil {
+			respondJSON(w, http.StatusInternalServerError, err)
+			return
+		}
+		respondJSON(w, http.StatusCreated, movie)
 	}
 }
