@@ -14,3 +14,18 @@ http endpoints(external)
      service(сбор недостающих данных и их проверка и обработка
         |
       store
+
+
+
+REST API
+
+movie/add
+movie/delete
+movie/remove
+movie/AddElementToArray
+
+POST    /movie CreateMovie
+GET     /movie ListMovies
+GET     /movie/{id} GetMovieById
+DELETE  /movie/{id} DELETEMOVIEBYID
+PUT     /movie/{id} UPDATE Movie
