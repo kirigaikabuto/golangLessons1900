@@ -38,7 +38,7 @@ func (r *RedisStore) GetValue(key string, src interface{}) error {
 	if err != nil {
 		return err
 	}
-	err = json.Unmarshal([]byte(val), &src)
+	err = json.Unmarshal([]byte(val), src)
 	if err != nil {
 		return err
 	}

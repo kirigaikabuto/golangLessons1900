@@ -33,7 +33,7 @@ func main() {
 		return
 	}
 	book2 := &Book{}
-	err = redisConnect.GetValue(key, &book2)
+	err = redisConnect.GetValue(key, book2)
 	if err != nil {
 		log.Fatal(err)
 		return
