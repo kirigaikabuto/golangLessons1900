@@ -12,6 +12,7 @@ type HttpEndpoints interface {
 	TestEndpoint() func(w http.ResponseWriter, r *http.Request)
 	TestEndpointWithParam(idParam string) func(w http.ResponseWriter, r *http.Request)
 	TestPostEndpoint() func(w http.ResponseWriter, r *http.Request)
+	RegisterEndpoint() func(w http.ResponseWriter, r *http.Request)
 }
 type httpEndpoints struct {
 	//variable connection to db
@@ -116,4 +117,10 @@ func respondJSON(w http.ResponseWriter, status int, payload interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	w.Write(response)
+}
+
+func (h *httpEndpoints) RegisterEndpoint() func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
 }
