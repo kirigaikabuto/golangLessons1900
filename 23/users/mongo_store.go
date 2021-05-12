@@ -2,14 +2,13 @@ package users
 
 import (
 	"context"
+	"errors"
+	"github.com/google/uuid"
 	"github.com/kirigaikabuto/golangLessons1900/23/config"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"math/rand"
-	"strconv"
 	"strings"
-	"time"
 )
 
 type usersStore struct {
@@ -36,8 +35,8 @@ func NewUsersStore(config config.MongoConfig) (UsersStore, error) {
 }
 
 func (u *usersStore) Create(user *User) (*User, error) {
-	rand.Seed(time.Now().UnixNano())
-	user.Id = strconv.Itoa(rand.Intn(1000))
+	token := uuid.New()
+	user.Id = token.String()
 	_, err := u.collection.InsertOne(context.TODO(), user)
 	if err != nil {
 		return nil, err
@@ -49,6 +48,19 @@ func (u *usersStore) Get(id int) (*User, error) {
 	filter := bson.D{{"id", id}}
 	user := &User{}
 	err := u.collection.FindOne(context.TODO(), filter).Decode(&user)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
+func (u *usersStore) GetByUsernameAndPassword(username, password string) (*User, error) {
+	filter := bson.D{{"username", username}, {"password", password}}
+	user := &User{}
+	err := u.collection.FindOne(context.TODO(), filter).Decode(&user)
+	if err != nil && err.Error() == "mongo: no documents in result" {
+		return nil, errors.New("no user by this username and password")
+	}
 	if err != nil {
 		return nil, err
 	}

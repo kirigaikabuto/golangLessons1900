@@ -13,13 +13,16 @@ type HttpEndpoints interface {
 	TestEndpointWithParam(idParam string) func(w http.ResponseWriter, r *http.Request)
 	TestPostEndpoint() func(w http.ResponseWriter, r *http.Request)
 	RegisterEndpoint() func(w http.ResponseWriter, r *http.Request)
-}
-type httpEndpoints struct {
-	//variable connection to db
+	LoginEndpoint() func(w http.ResponseWriter, r *http.Request)
 }
 
-func NewHttpEndpoints() HttpEndpoints {
-	return &httpEndpoints{}
+type httpEndpoints struct {
+	//variable connection to db
+	usersStore users.UsersStore
+}
+
+func NewHttpEndpoints(uS users.UsersStore) HttpEndpoints {
+	return &httpEndpoints{usersStore: uS}
 }
 
 func (h *httpEndpoints) TestEndpoint() func(w http.ResponseWriter, r *http.Request) {
@@ -121,6 +124,64 @@ func respondJSON(w http.ResponseWriter, status int, payload interface{}) {
 
 func (h *httpEndpoints) RegisterEndpoint() func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		jsonData, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			respondJSON(w, http.StatusBadRequest, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusBadRequest,
+			})
+			return
+		}
+		user := &users.User{}
+		err = json.Unmarshal(jsonData, &user)
+		if err != nil {
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		response, err := h.usersStore.Create(user)
+		if err != nil {
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		respondJSON(w, http.StatusCreated, response)
+		return
+	}
+}
 
+func (h *httpEndpoints) LoginEndpoint() func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		jsonData, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			respondJSON(w, http.StatusBadRequest, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusBadRequest,
+			})
+			return
+		}
+		req := &LoginRequest{}
+		err = json.Unmarshal(jsonData, &req)
+		if err != nil {
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		user, err := h.usersStore.GetByUsernameAndPassword(req.Username, req.Password)
+		if err != nil {
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		respondJSON(w, http.StatusOK, user)
+		return
 	}
 }
