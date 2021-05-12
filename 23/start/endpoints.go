@@ -4,12 +4,14 @@ import (
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"github.com/kirigaikabuto/golangLessons1900/23/users"
+	"io/ioutil"
 	"net/http"
 )
 
 type HttpEndpoints interface {
 	TestEndpoint() func(w http.ResponseWriter, r *http.Request)
 	TestEndpointWithParam(idParam string) func(w http.ResponseWriter, r *http.Request)
+	TestPostEndpoint() func(w http.ResponseWriter, r *http.Request)
 }
 type httpEndpoints struct {
 	//variable connection to db
@@ -75,6 +77,31 @@ func (h *httpEndpoints) TestEndpointWithParam(idParam string) func(w http.Respon
 			return
 		}
 		respondJSON(w, http.StatusOK, response)
+		return
+	}
+}
+
+func (h *httpEndpoints) TestPostEndpoint() func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		jsonData, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			respondJSON(w, http.StatusBadRequest, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusBadRequest,
+			})
+			return
+		}
+		user := &users.User{}
+		err = json.Unmarshal(jsonData, &user)
+		if err != nil {
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		user.Id = "3333"
+		respondJSON(w, http.StatusCreated, user)
 		return
 	}
 }
