@@ -44,7 +44,7 @@ func (u *usersStore) Create(user *User) (*User, error) {
 	return user, nil
 }
 
-func (u *usersStore) Get(id int) (*User, error) {
+func (u *usersStore) Get(id string) (*User, error) {
 	filter := bson.D{{"id", id}}
 	user := &User{}
 	err := u.collection.FindOne(context.TODO(), filter).Decode(&user)

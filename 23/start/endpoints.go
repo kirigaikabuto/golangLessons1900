@@ -2,10 +2,13 @@ package start
 
 import (
 	"encoding/json"
+	"github.com/google/uuid"
 	"github.com/gorilla/mux"
+	"github.com/kirigaikabuto/golangLessons1900/23/redis_lib"
 	"github.com/kirigaikabuto/golangLessons1900/23/users"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 type HttpEndpoints interface {
@@ -14,15 +17,17 @@ type HttpEndpoints interface {
 	TestPostEndpoint() func(w http.ResponseWriter, r *http.Request)
 	RegisterEndpoint() func(w http.ResponseWriter, r *http.Request)
 	LoginEndpoint() func(w http.ResponseWriter, r *http.Request)
+	ProfileEndpoint() func(w http.ResponseWriter, r *http.Request)
 }
 
 type httpEndpoints struct {
 	//variable connection to db
 	usersStore users.UsersStore
+	redisStore *redis_lib.RedisStore
 }
 
-func NewHttpEndpoints(uS users.UsersStore) HttpEndpoints {
-	return &httpEndpoints{usersStore: uS}
+func NewHttpEndpoints(uS users.UsersStore, rS *redis_lib.RedisStore) HttpEndpoints {
+	return &httpEndpoints{usersStore: uS, redisStore: rS}
 }
 
 func (h *httpEndpoints) TestEndpoint() func(w http.ResponseWriter, r *http.Request) {
@@ -181,7 +186,53 @@ func (h *httpEndpoints) LoginEndpoint() func(w http.ResponseWriter, r *http.Requ
 			})
 			return
 		}
-		respondJSON(w, http.StatusOK, user)
+		key := uuid.New().String()
+		err = h.redisStore.SetValue(key, user, 1*time.Minute)
+		if err != nil {
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		response := &LoginResponse{AccessKey: key}
+		respondJSON(w, http.StatusOK, response)
+		return
+	}
+}
+
+func (h *httpEndpoints) ProfileEndpoint() func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		accessKey := r.Header.Get("Authorization")
+		if accessKey == "" {
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    "Unauthorization access",
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		user := &users.User{}
+		err := h.redisStore.GetValue(accessKey, &user)
+		if err != nil {
+			errorMessage := err.Error()
+			if err.Error() == "redis: nil" {
+				errorMessage = "Your access key is expired"
+			}
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    errorMessage,
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		response, err := h.usersStore.Get(user.Id)
+		if err != nil {
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		respondJSON(w, http.StatusOK, response)
 		return
 	}
 }
