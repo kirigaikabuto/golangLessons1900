@@ -9,6 +9,8 @@ service -> check for something
 
 endpoints -> get data from user
 
+middleware -> check for access token
+
 midleware
 
 /profile ->ProfileEndpoint()
