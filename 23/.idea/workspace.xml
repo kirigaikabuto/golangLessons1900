@@ -26,13 +26,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4562f3a8-e0c2-480c-b335-91fecfc9c401" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/products/commands.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/products/endpoints.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/products/models.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/products/mongo_store.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/products/store.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/middleware.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/info" beforeDir="false" afterPath="$PROJECT_DIR$/info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start/endpoints.go" beforeDir="false" afterPath="$PROJECT_DIR$/start/endpoints.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

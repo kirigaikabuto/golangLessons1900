@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/kirigaikabuto/golangLessons1900/23/common"
 	"github.com/kirigaikabuto/golangLessons1900/23/config"
 	"github.com/kirigaikabuto/golangLessons1900/23/products"
 	"github.com/kirigaikabuto/golangLessons1900/23/redis_lib"
@@ -30,6 +31,10 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	//middleware connect
+	middleware := common.NewMiddleware(redisStore)
+
 	mainEndpoints := start.NewHttpEndpoints(usersMongoStore, redisStore)
 	//start
 	//router.Methods("GET").Path("/test").HandlerFunc(mainEndpoints.TestEndpoint())
@@ -37,7 +42,7 @@ func main() {
 	//router.Methods("POST").Path("/test").HandlerFunc(mainEndpoints.TestPostEndpoint())
 	router.Methods("POST").Path("/register").HandlerFunc(mainEndpoints.RegisterEndpoint())
 	router.Methods("POST").Path("/login").HandlerFunc(mainEndpoints.LoginEndpoint())
-	router.Methods("GET").Path("/profile").HandlerFunc(mainEndpoints.ProfileEndpoint())
+	router.Methods("GET").Path("/profile").Handler(middleware.LoginMiddleware(http.HandlerFunc(mainEndpoints.ProfileEndpoint())))
 
 	//products
 	productMongoStore, err := products.NewProductStore(config.MongoConfig{
@@ -48,9 +53,8 @@ func main() {
 	})
 	productHttpEndpoints := products.NewProductHttpEndpoints(productMongoStore)
 
-	router.Methods("POST").Path("/products").HandlerFunc(productHttpEndpoints.CreateProduct())
-	router.Methods("GET").Path("/products").HandlerFunc(productHttpEndpoints.ListProduct())
-
+	router.Methods("POST").Path("/products").Handler(middleware.LoginMiddleware(http.HandlerFunc(productHttpEndpoints.CreateProduct())))
+	router.Methods("GET").Path("/products").Handler(middleware.LoginMiddleware(http.HandlerFunc(productHttpEndpoints.ListProduct())))
 	fmt.Println("server is running on port 8080")
 	http.ListenAndServe(":8080", router)
 }

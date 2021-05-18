@@ -225,28 +225,9 @@ func (h *httpEndpoints) LoginEndpoint() func(w http.ResponseWriter, r *http.Requ
 
 func (h *httpEndpoints) ProfileEndpoint() func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		accessKey := r.Header.Get("Authorization")
-		if accessKey == "" {
-			respondJSON(w, http.StatusInternalServerError, HttpError{
-				Message:    "Unauthorization access",
-				StatusCode: http.StatusInternalServerError,
-			})
-			return
-		}
-		user := &users.User{}
-		err := h.redisStore.GetValue(accessKey, &user)
-		if err != nil {
-			errorMessage := err.Error()
-			if err.Error() == "redis: nil" {
-				errorMessage = "Your access key is expired"
-			}
-			respondJSON(w, http.StatusInternalServerError, HttpError{
-				Message:    errorMessage,
-				StatusCode: http.StatusInternalServerError,
-			})
-			return
-		}
-		response, err := h.usersStore.Get(user.Id)
+		contextData := r.Context().Value("user_id")
+		userId := contextData.(string)
+		response, err := h.usersStore.Get(userId)
 		if err != nil {
 			respondJSON(w, http.StatusInternalServerError, HttpError{
 				Message:    err.Error(),

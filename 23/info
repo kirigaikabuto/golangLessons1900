@@ -8,3 +8,9 @@ store -> connect to db
 service -> check for something
 
 endpoints -> get data from user
+
+midleware
+
+/profile ->ProfileEndpoint()
+
+/profile -> LoginMiddleware()(if access token exist) -> ProfileEndpoint()
