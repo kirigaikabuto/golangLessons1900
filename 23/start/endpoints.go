@@ -146,6 +146,21 @@ func (h *httpEndpoints) RegisterEndpoint() func(w http.ResponseWriter, r *http.R
 			})
 			return
 		}
+		oldUser, err := h.usersStore.GetByUsernameAndPassword(user.Username, user.Password)
+		if err != nil && err != users.ErrNoUser {
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		if oldUser != nil {
+			respondJSON(w, http.StatusBadRequest, HttpError{
+				Message:    ErrUserAlreadyExist.Error(),
+				StatusCode: http.StatusBadRequest,
+			})
+			return
+		}
 		response, err := h.usersStore.Create(user)
 		if err != nil {
 			respondJSON(w, http.StatusInternalServerError, HttpError{

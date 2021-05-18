@@ -2,7 +2,6 @@ package users
 
 import (
 	"context"
-	"errors"
 	"github.com/google/uuid"
 	"github.com/kirigaikabuto/golangLessons1900/23/config"
 	"go.mongodb.org/mongo-driver/bson"
@@ -59,7 +58,7 @@ func (u *usersStore) GetByUsernameAndPassword(username, password string) (*User,
 	user := &User{}
 	err := u.collection.FindOne(context.TODO(), filter).Decode(&user)
 	if err != nil && err.Error() == "mongo: no documents in result" {
-		return nil, errors.New("no user by this username and password")
+		return nil, ErrNoUser
 	}
 	if err != nil {
 		return nil, err

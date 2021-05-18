@@ -4,4 +4,4 @@ all: one
 one:
 	git add .
 	git commit -m "sdsd"
-	git push
+	git push origin 24
