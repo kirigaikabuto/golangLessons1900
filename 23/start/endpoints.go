@@ -146,6 +146,13 @@ func (h *httpEndpoints) RegisterEndpoint() func(w http.ResponseWriter, r *http.R
 			})
 			return
 		}
+		if user.Username == "" || user.Password == "" {
+			respondJSON(w, http.StatusBadRequest, HttpError{
+				Message:    ErrUsernamePasswordEmpty.Error(),
+				StatusCode: http.StatusBadRequest,
+			})
+			return
+		}
 		oldUser, err := h.usersStore.GetByUsernameAndPassword(user.Username, user.Password)
 		if err != nil && err != users.ErrNoUser {
 			respondJSON(w, http.StatusInternalServerError, HttpError{
