@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/kirigaikabuto/golangLessons1900/23/config"
+	"github.com/kirigaikabuto/golangLessons1900/23/products"
 	"github.com/kirigaikabuto/golangLessons1900/23/redis_lib"
 	"github.com/kirigaikabuto/golangLessons1900/23/start"
 	"github.com/kirigaikabuto/golangLessons1900/23/users"
@@ -30,12 +31,26 @@ func main() {
 		log.Fatal(err)
 	}
 	mainEndpoints := start.NewHttpEndpoints(usersMongoStore, redisStore)
-	router.Methods("GET").Path("/test").HandlerFunc(mainEndpoints.TestEndpoint())
-	router.Methods("GET").Path("/test/{param}").HandlerFunc(mainEndpoints.TestEndpointWithParam("param"))
-	router.Methods("POST").Path("/test").HandlerFunc(mainEndpoints.TestPostEndpoint())
+	//start
+	//router.Methods("GET").Path("/test").HandlerFunc(mainEndpoints.TestEndpoint())
+	//router.Methods("GET").Path("/test/{param}").HandlerFunc(mainEndpoints.TestEndpointWithParam("param"))
+	//router.Methods("POST").Path("/test").HandlerFunc(mainEndpoints.TestPostEndpoint())
 	router.Methods("POST").Path("/register").HandlerFunc(mainEndpoints.RegisterEndpoint())
 	router.Methods("POST").Path("/login").HandlerFunc(mainEndpoints.LoginEndpoint())
 	router.Methods("GET").Path("/profile").HandlerFunc(mainEndpoints.ProfileEndpoint())
+
+	//products
+	productMongoStore, err := products.NewProductStore(config.MongoConfig{
+		Host:           "localhost",
+		Port:           "27017",
+		Database:       "ivi",
+		CollectionName: "products",
+	})
+	productHttpEndpoints := products.NewProductHttpEndpoints(productMongoStore)
+
+	router.Methods("POST").Path("/products").HandlerFunc(productHttpEndpoints.CreateProduct())
+	router.Methods("GET").Path("/products").HandlerFunc(productHttpEndpoints.ListProduct())
+
 	fmt.Println("server is running on port 8080")
 	http.ListenAndServe(":8080", router)
 }

@@ -26,9 +26,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4562f3a8-e0c2-480c-b335-91fecfc9c401" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/products/commands.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/endpoints.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/models.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/mongo_store.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/store.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start/endpoints.go" beforeDir="false" afterPath="$PROJECT_DIR$/start/endpoints.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start/erros_const.go" beforeDir="false" afterPath="$PROJECT_DIR$/start/errors_const.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +70,7 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -88,5 +93,11 @@
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="184" y="9" key="SettingsEditor" timestamp="1621341986303">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1621341986303" />
   </component>
 </project>
