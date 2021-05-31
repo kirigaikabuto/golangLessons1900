@@ -5,6 +5,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/kirigaikabuto/golangLessons1900/23/common"
 	"github.com/kirigaikabuto/golangLessons1900/23/config"
+	"github.com/kirigaikabuto/golangLessons1900/23/orders"
 	"github.com/kirigaikabuto/golangLessons1900/23/products"
 	"github.com/kirigaikabuto/golangLessons1900/23/redis_lib"
 	"github.com/kirigaikabuto/golangLessons1900/23/start"
@@ -51,10 +52,27 @@ func main() {
 		Database:       "ivi",
 		CollectionName: "products",
 	})
+	if err != nil {
+		log.Fatal(err)
+	}
 	productHttpEndpoints := products.NewProductHttpEndpoints(productMongoStore)
 
 	router.Methods("POST").Path("/products").Handler(middleware.LoginMiddleware(http.HandlerFunc(productHttpEndpoints.CreateProduct())))
 	router.Methods("GET").Path("/products").Handler(middleware.LoginMiddleware(http.HandlerFunc(productHttpEndpoints.ListProduct())))
+
+	ordersMongoStore, err := orders.NewOrdersStore(config.MongoConfig{
+		Host:           "localhost",
+		Port:           "27017",
+		Database:       "ivi",
+		CollectionName: "orders",
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	ordersHttpEndpoints := orders.NewOrderHttpEndpoints(ordersMongoStore)
+
+	router.Methods("POST").Path("/orders").Handler(middleware.LoginMiddleware(http.HandlerFunc(ordersHttpEndpoints.CreateOrder())))
+	router.Methods("GET").Path("/orders").Handler(middleware.LoginMiddleware(http.HandlerFunc(ordersHttpEndpoints.ListOrder())))
 	fmt.Println("server is running on port 8080")
 	http.ListenAndServe(":8080", router)
 }

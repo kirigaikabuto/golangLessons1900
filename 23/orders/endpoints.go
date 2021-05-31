@@ -41,7 +41,7 @@ func (o *orderHttpEndpoints) CreateOrder() func(w http.ResponseWriter, r *http.R
 			return
 		}
 		cmd.UserId = userId
-		newProduct, err := o.store.Create(&Order{
+		newOrder, err := o.store.Create(&Order{
 			ProductId: cmd.ProductId,
 			UserId:    cmd.UserId,
 		})
@@ -52,7 +52,7 @@ func (o *orderHttpEndpoints) CreateOrder() func(w http.ResponseWriter, r *http.R
 			})
 			return
 		}
-		respondJSON(w, http.StatusCreated, newProduct)
+		respondJSON(w, http.StatusCreated, newOrder)
 		return
 	}
 }

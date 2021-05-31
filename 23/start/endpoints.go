@@ -209,7 +209,7 @@ func (h *httpEndpoints) LoginEndpoint() func(w http.ResponseWriter, r *http.Requ
 			return
 		}
 		key := uuid.New().String()
-		err = h.redisStore.SetValue(key, user, 1*time.Minute)
+		err = h.redisStore.SetValue(key, user, 5*time.Minute)
 		if err != nil {
 			respondJSON(w, http.StatusInternalServerError, HttpError{
 				Message:    err.Error(),

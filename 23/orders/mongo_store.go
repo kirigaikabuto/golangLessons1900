@@ -44,7 +44,7 @@ func (o *ordersStore) Create(order *Order) (*Order, error) {
 }
 
 func (o *ordersStore) ListOrdersByUserId(userId string) ([]Order, error) {
-	filter := bson.D{{"user_id", userId}}
+	filter := bson.D{{"userid", userId}}
 	orders := []Order{}
 	cursor, err := o.collection.Find(context.TODO(), filter)
 	if err != nil {
