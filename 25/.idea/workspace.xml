@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bb0de6e-0528-4b8c-8b08-ef0da42f1631" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../16/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../16/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../17/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../17/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../22/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../22/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../23/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../23/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +37,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Golang1300Lessons" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../23" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -52,5 +53,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
