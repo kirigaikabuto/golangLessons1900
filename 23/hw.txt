@@ -1,0 +1,6 @@
+система подсчетов
+
+FirstName
+LatName
+Products:["product_name"....]
+TotalSumL:
