@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="654a1510-e374-46c9-b116-ac9665b92f0d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/products/mongo_product_store.go" beforeDir="false" afterPath="$PROJECT_DIR$/products/mongo_product_store.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/products/product_store.go" beforeDir="false" afterPath="$PROJECT_DIR$/products/product_store.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +37,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../12" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../git.dar.tech/griffon/test-api" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
