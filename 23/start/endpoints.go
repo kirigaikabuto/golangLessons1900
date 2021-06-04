@@ -146,6 +146,28 @@ func (h *httpEndpoints) RegisterEndpoint() func(w http.ResponseWriter, r *http.R
 			})
 			return
 		}
+		if user.Username == "" || user.Password == "" {
+			respondJSON(w, http.StatusBadRequest, HttpError{
+				Message:    ErrUsernamePasswordEmpty.Error(),
+				StatusCode: http.StatusBadRequest,
+			})
+			return
+		}
+		oldUser, err := h.usersStore.GetByUsernameAndPassword(user.Username, user.Password)
+		if err != nil && err != users.ErrNoUser {
+			respondJSON(w, http.StatusInternalServerError, HttpError{
+				Message:    err.Error(),
+				StatusCode: http.StatusInternalServerError,
+			})
+			return
+		}
+		if oldUser != nil {
+			respondJSON(w, http.StatusBadRequest, HttpError{
+				Message:    ErrUserAlreadyExist.Error(),
+				StatusCode: http.StatusBadRequest,
+			})
+			return
+		}
 		response, err := h.usersStore.Create(user)
 		if err != nil {
 			respondJSON(w, http.StatusInternalServerError, HttpError{
@@ -187,7 +209,7 @@ func (h *httpEndpoints) LoginEndpoint() func(w http.ResponseWriter, r *http.Requ
 			return
 		}
 		key := uuid.New().String()
-		err = h.redisStore.SetValue(key, user, 1*time.Minute)
+		err = h.redisStore.SetValue(key, user, 5*time.Minute)
 		if err != nil {
 			respondJSON(w, http.StatusInternalServerError, HttpError{
 				Message:    err.Error(),
@@ -203,28 +225,9 @@ func (h *httpEndpoints) LoginEndpoint() func(w http.ResponseWriter, r *http.Requ
 
 func (h *httpEndpoints) ProfileEndpoint() func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		accessKey := r.Header.Get("Authorization")
-		if accessKey == "" {
-			respondJSON(w, http.StatusInternalServerError, HttpError{
-				Message:    "Unauthorization access",
-				StatusCode: http.StatusInternalServerError,
-			})
-			return
-		}
-		user := &users.User{}
-		err := h.redisStore.GetValue(accessKey, &user)
-		if err != nil {
-			errorMessage := err.Error()
-			if err.Error() == "redis: nil" {
-				errorMessage = "Your access key is expired"
-			}
-			respondJSON(w, http.StatusInternalServerError, HttpError{
-				Message:    errorMessage,
-				StatusCode: http.StatusInternalServerError,
-			})
-			return
-		}
-		response, err := h.usersStore.Get(user.Id)
+		contextData := r.Context().Value("user_id")
+		userId := contextData.(string)
+		response, err := h.usersStore.Get(userId)
 		if err != nil {
 			respondJSON(w, http.StatusInternalServerError, HttpError{
 				Message:    err.Error(),

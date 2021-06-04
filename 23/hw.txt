@@ -1,0 +1,8 @@
+система подсчетов
+
+economy
+
+FirstName
+LatName
+Products:["product_name"....]
+TotalSumL:

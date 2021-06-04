@@ -1,0 +1,15 @@
+1) создать в папку src папку github.com
+2) в папке github.com создать папку с вашим username(kirigaikabuto)
+3) создать какую либо папку(lesson27) в папке с вашим username
+4) необходимо создать репозиторий с точно таким же названием как ваша папка(lesson27)
+5) открыть папку lesson27 через goland и сделал команду go mod init
+6) скопировать код из github.com для того чтобы заполнить репозиторий lesson27
+echo "# lesson27" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/kirigaikabuto/lesson27.git
+git push -u origin main
+
+7)

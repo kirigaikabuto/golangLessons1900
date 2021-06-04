@@ -1,4 +1,4 @@
-package users
+package orders
 
 import (
 	"context"
@@ -10,11 +10,11 @@ import (
 	"strings"
 )
 
-type usersStore struct {
+type ordersStore struct {
 	collection *mongo.Collection
 }
 
-func NewUsersStore(config config.MongoConfig) (UsersStore, error) {
+func NewOrdersStore(config config.MongoConfig) (OrdersStore, error) {
 	clientOptions := options.Client().ApplyURI("mongodb://" + config.Host + ":" + config.Port)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
@@ -30,38 +30,29 @@ func NewUsersStore(config config.MongoConfig) (UsersStore, error) {
 		return nil, err
 	}
 	collection := db.Collection(config.CollectionName)
-	return &usersStore{collection: collection}, nil
+	return &ordersStore{collection: collection}, nil
 }
 
-func (u *usersStore) Create(user *User) (*User, error) {
+func (o *ordersStore) Create(order *Order) (*Order, error) {
 	token := uuid.New()
-	user.Id = token.String()
-	_, err := u.collection.InsertOne(context.TODO(), user)
+	order.Id = token.String()
+	_, err := o.collection.InsertOne(context.TODO(), order)
 	if err != nil {
 		return nil, err
 	}
-	return user, nil
+	return order, nil
 }
 
-func (u *usersStore) Get(id string) (*User, error) {
-	filter := bson.D{{"id", id}}
-	user := &User{}
-	err := u.collection.FindOne(context.TODO(), filter).Decode(&user)
+func (o *ordersStore) ListOrdersByUserId(userId string) ([]Order, error) {
+	filter := bson.D{{"userid", userId}}
+	orders := []Order{}
+	cursor, err := o.collection.Find(context.TODO(), filter)
 	if err != nil {
 		return nil, err
 	}
-	return user, nil
-}
-
-func (u *usersStore) GetByUsernameAndPassword(username, password string) (*User, error) {
-	filter := bson.D{{"username", username}, {"password", password}}
-	user := &User{}
-	err := u.collection.FindOne(context.TODO(), filter).Decode(&user)
-	if err != nil && err.Error() == "mongo: no documents in result" {
-		return nil, ErrNoUser
-	}
+	err = cursor.All(context.TODO(), &orders)
 	if err != nil {
 		return nil, err
 	}
-	return user, nil
+	return orders, nil
 }

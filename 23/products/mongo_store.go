@@ -1,4 +1,4 @@
-package users
+package products
 
 import (
 	"context"
@@ -10,11 +10,11 @@ import (
 	"strings"
 )
 
-type usersStore struct {
+type productStore struct {
 	collection *mongo.Collection
 }
 
-func NewUsersStore(config config.MongoConfig) (UsersStore, error) {
+func NewProductStore(config config.MongoConfig) (ProductStore, error) {
 	clientOptions := options.Client().ApplyURI("mongodb://" + config.Host + ":" + config.Port)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
@@ -30,38 +30,43 @@ func NewUsersStore(config config.MongoConfig) (UsersStore, error) {
 		return nil, err
 	}
 	collection := db.Collection(config.CollectionName)
-	return &usersStore{collection: collection}, nil
+	return &productStore{collection: collection}, nil
 }
 
-func (u *usersStore) Create(user *User) (*User, error) {
+func (p *productStore) Create(product *Product) (*Product, error) {
 	token := uuid.New()
-	user.Id = token.String()
-	_, err := u.collection.InsertOne(context.TODO(), user)
+	product.Id = token.String()
+	_, err := p.collection.InsertOne(context.TODO(), product)
 	if err != nil {
 		return nil, err
 	}
-	return user, nil
+	return product, nil
 }
 
-func (u *usersStore) Get(id string) (*User, error) {
+func (p *productStore) GetById(id string) (*Product, error) {
 	filter := bson.D{{"id", id}}
-	user := &User{}
-	err := u.collection.FindOne(context.TODO(), filter).Decode(&user)
+	product := &Product{}
+	err := p.collection.FindOne(context.TODO(), filter).Decode(&product)
 	if err != nil {
 		return nil, err
 	}
-	return user, nil
+	return product, nil
 }
 
-func (u *usersStore) GetByUsernameAndPassword(username, password string) (*User, error) {
-	filter := bson.D{{"username", username}, {"password", password}}
-	user := &User{}
-	err := u.collection.FindOne(context.TODO(), filter).Decode(&user)
-	if err != nil && err.Error() == "mongo: no documents in result" {
-		return nil, ErrNoUser
-	}
+func (p *productStore) List() ([]Product, error) {
+	filter := bson.D{}
+	products := []Product{}
+	cursor, err := p.collection.Find(context.TODO(), filter)
 	if err != nil {
 		return nil, err
 	}
-	return user, nil
+	err = cursor.All(context.TODO(), &products)
+	if err != nil {
+		return nil, err
+	}
+	return products, nil
+}
+
+func (p *productStore) Delete(id string) error {
+	return nil
 }

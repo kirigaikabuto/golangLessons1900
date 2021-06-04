@@ -1,7 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feat" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="4562f3a8-e0c2-480c-b335-91fecfc9c401" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/.idea/lesson27Part2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/config/mongo_config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/config/redis_config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/users/errors_const.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/users/models.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/users/mongo_store.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lesson27Part2/users/store.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../16/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../16/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../17/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../17/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../22/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../22/go.mod" afterDir="false" />
@@ -40,6 +77,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>

@@ -3,3 +3,16 @@
 3) create get profile endpoint with access key
 
 
+store -> connect to db
+
+service -> check for something
+
+endpoints -> get data from user
+
+middleware -> check for access token
+
+midleware
+
+/profile ->ProfileEndpoint()
+
+/profile -> LoginMiddleware()(if access token exist) -> ProfileEndpoint()
