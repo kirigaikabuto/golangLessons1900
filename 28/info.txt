@@ -11,3 +11,6 @@ rabbitmqctl stop
 
 5) установить библиотеку на golang
 go get github.com/streadway/amqp
+
+
+rpc - remote procedure call
