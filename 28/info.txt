@@ -1,0 +1,9 @@
+1) в пуске пишем rab и запускаем
+2) запустить сервер
+rabbitmqctl start_app
+
+3) проверить статус сервера
+rabbitmqctl status
+
+4) остановить сервер
+rabbitmqctl stop
