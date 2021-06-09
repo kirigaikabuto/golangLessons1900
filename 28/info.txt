@@ -1,4 +1,5 @@
 1) в пуске пишем rab и запускаем
+cd C:\Program Files\RabbitMQ Server\rabbitmq_server-3.8.11\sbin>
 2) запустить сервер
 rabbitmqctl start_app
 
@@ -7,3 +8,6 @@ rabbitmqctl status
 
 4) остановить сервер
 rabbitmqctl stop
+
+5) установить библиотеку на golang
+go get github.com/streadway/amqp
