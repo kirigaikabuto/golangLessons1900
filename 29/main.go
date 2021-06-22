@@ -37,6 +37,7 @@ func main() {
 	amqpProductEndpoints := products.NewAmqpEndpoints()
 	srv.Endpoint("amqp_get_product", amqpProductEndpoints.GetProductAmqpEndpoint())
 	srv.Endpoint("amqp_get_products", amqpProductEndpoints.GetProductsAmqpEndpoint())
+	srv.Endpoint("amqp_get_product_by_id", amqpProductEndpoints.GetProductByIdAmqpEndpoint())
 	if err := srv.Start(); err != nil {
 		panic(err)
 		return

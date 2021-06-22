@@ -5,3 +5,7 @@ type Product struct {
 	Name  string `json:"name"`
 	Price int    `json:"price"`
 }
+
+type GetProductByIdCommand struct {
+	Id string `json:"id"`
+}
