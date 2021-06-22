@@ -2,6 +2,8 @@ github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/djumanoff/amqp v1.0.6 h1:su9ywx/MFPcGBPE9J3Q8F2f7W702lq5HBXhRqwc6MXY=
 github.com/djumanoff/amqp v1.0.6/go.mod h1:iMGsrDyTlB0+Wx2WQQPo2eqyKMHWdv/XsLyv780DUe8=
 github.com/kirigaikabuto/golangLessons1900 v0.0.0-20210622132810-5998f0748cdf h1:uDLUTbVyENQgj50UH7JvGh34lVBLfZUQximWBnRkVHQ=
+github.com/kirigaikabuto/golangLessons1900 v0.0.0-20210622135136-469f3fbc7e94 h1:i3Zt0Kd/tL8m6mEWlprSz4zkn8j+SQQjf9rXAEJzauQ=
+github.com/kirigaikabuto/golangLessons1900 v0.0.0-20210622135136-469f3fbc7e94/go.mod h1:welXCsOG8chjLd3WcmxB+L8YIQGnXtDWV2KXZChJafs=
 github.com/kirigaikabuto/golangLessons1900/29 v0.0.0-20210622132810-5998f0748cdf h1:kG4GiPFlfPOOznY69RM0t0C6I7rxLdo52De/38RxIu4=
 github.com/kirigaikabuto/golangLessons1900/29 v0.0.0-20210622132810-5998f0748cdf/go.mod h1:M11cbQsQBTMEjaDifoqBQfmI2zP960bgAGdlj+yINyo=
 github.com/konsorten/go-windows-terminal-sequences v0.0.0-20180402223658-b729f2633dfe h1:CHRGQ8V7OlCYtwaKPJi3iA7J+YdNKdo8j7nG5IgDhjs=

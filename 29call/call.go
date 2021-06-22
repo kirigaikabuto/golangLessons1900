@@ -7,6 +7,10 @@ import (
 	"github.com/kirigaikabuto/golangLessons1900/29/products"
 )
 
+type GetProductByIdCommand struct {
+	Id string `json:"id"`
+}
+
 func main() {
 	//call function getProducts
 	//config for rabbitmq
@@ -59,4 +63,23 @@ func main() {
 	for i, v := range pr {
 		fmt.Println(i, v)
 	}
+	fmt.Println("---EXAMPLE FOR GET PRODUCT BY ID")
+	req := &GetProductByIdCommand{Id: "1"}
+	reqJson, err := json.Marshal(req)
+	if err != nil {
+		panic(err)
+		return
+	}
+	product3 := &products.Product{}
+	respForProductByID, err := clt.Call("amqp_get_product_by_id", amqp.Message{Body: reqJson})
+	if err != nil {
+		panic(err)
+		return
+	}
+	err = json.Unmarshal(respForProductByID.Body, &product3)
+	if err != nil {
+		panic(err)
+		return
+	}
+	fmt.Println(product3)
 }
