@@ -26,3 +26,20 @@ func (u *UsersAmqpEndpoints) ListUsers() amqp.Handler {
 		return &amqp.Message{Body: dataJson}
 	}
 }
+
+func (u *UsersAmqpEndpoints) CreateUser() amqp.Handler {
+	return func(message amqp.Message) *amqp.Message {
+		jsonData := message.Body
+		var user *User
+		err := json.Unmarshal(jsonData, &user)
+		if err != nil {
+			panic(err)
+		}
+		newUser, err := u.usersStore.Create(user)
+		if err != nil {
+			panic(err)
+		}
+		dataJson, err := json.Marshal(newUser)
+		return &amqp.Message{Body: dataJson}
+	}
+}

@@ -39,6 +39,7 @@ func main() {
 		return
 	}
 	srv.Endpoint("list_users", usersAmqpEndpoints.ListUsers())
+	srv.Endpoint("create_user", usersAmqpEndpoints.CreateUser())
 	err = srv.Start()
 	if err != nil {
 		panic(err)
