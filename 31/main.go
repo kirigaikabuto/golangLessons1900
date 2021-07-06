@@ -2,29 +2,39 @@ package main
 
 import (
 	"fmt"
+	"github.com/djumanoff/amqp"
 	"github.com/gorilla/mux"
 	common "github.com/kirigaikabuto/common-lib31"
+	redis_lib "github.com/kirigaikabuto/common-lib31"
 	orders "github.com/kirigaikabuto/orders31"
 	products "github.com/kirigaikabuto/products31"
-	redis_lib "github.com/kirigaikabuto/common-lib31"
 	start "github.com/kirigaikabuto/start31"
-	users "github.com/kirigaikabuto/users31"
 	"log"
 	"net/http"
 )
 
 func main() {
-	router := mux.NewRouter()
-	usersMongoStore, err := users.NewUsersStore(common.MongoConfig{
-		Host:           "localhost",
-		Port:           "27017",
-		Database:       "ivi",
-		CollectionName: "users",
-	})
-	if err != nil {
-		log.Fatal(err)
+
+
+	rabbitConfig := amqp.Config{
+		Host:     "localhost",
+		Port:     5672,
+		LogLevel: 5,
 	}
-	redisStore, err := redis_lib.NewRedisConnect(common.RedisConfig{
+	sess := amqp.NewSession(rabbitConfig)
+	err := sess.Connect()
+	if err != nil {
+		panic(err)
+		return
+	}
+	clt, err := sess.Client(amqp.ClientConfig{})
+	if err != nil {
+		panic(err)
+		return
+	}
+
+
+	redisStore, err := redis_lib.NewRedisConnectStore(common.RedisConfig{
 		Host: "localhost",
 		Port: "6379",
 	})
@@ -33,16 +43,16 @@ func main() {
 	}
 
 	//middleware connect
-	middleware := common.NewMiddleware(redisStore)
+	middleware := common.NewMiddleware(*redisStore)
 
-	mainEndpoints := start.NewHttpEndpoints(usersMongoStore, redisStore)
+	mainEndpoints := start.NewHttpEndpoints(clt, redisStore)
 	//start
-	//router.Methods("GET").Path("/test").HandlerFunc(mainEndpoints.TestEndpoint())
-	//router.Methods("GET").Path("/test/{param}").HandlerFunc(mainEndpoints.TestEndpointWithParam("param"))
-	//router.Methods("POST").Path("/test").HandlerFunc(mainEndpoints.TestPostEndpoint())
+
+	router := mux.NewRouter()
+
 	router.Methods("POST").Path("/register").HandlerFunc(mainEndpoints.RegisterEndpoint())
 	router.Methods("POST").Path("/login").HandlerFunc(mainEndpoints.LoginEndpoint())
-	router.Methods("GET").Path("/profile").Handler(middleware.LoginMiddleware(http.HandlerFunc(mainEndpoints.ProfileEndpoint())))
+	router.Methods("GET").Path("/profile").HandlerFunc(middleware.LoginMiddleware(mainEndpoints.ProfileEndpoint()))
 
 	//products
 	productMongoStore, err := products.NewProductStore(common.MongoConfig{
@@ -56,8 +66,8 @@ func main() {
 	}
 	productHttpEndpoints := products.NewProductHttpEndpoints(productMongoStore)
 
-	router.Methods("POST").Path("/products").Handler(middleware.LoginMiddleware(http.HandlerFunc(productHttpEndpoints.CreateProduct())))
-	router.Methods("GET").Path("/products").Handler(middleware.LoginMiddleware(http.HandlerFunc(productHttpEndpoints.ListProduct())))
+	router.Methods("POST").Path("/products").HandlerFunc(middleware.LoginMiddleware(productHttpEndpoints.CreateProduct()))
+	router.Methods("GET").Path("/products").HandlerFunc(middleware.LoginMiddleware(productHttpEndpoints.ListProduct()))
 
 	ordersMongoStore, err := orders.NewOrdersStore(common.MongoConfig{
 		Host:           "localhost",
@@ -70,8 +80,8 @@ func main() {
 	}
 	ordersHttpEndpoints := orders.NewOrderHttpEndpoints(ordersMongoStore)
 
-	router.Methods("POST").Path("/orders").Handler(middleware.LoginMiddleware(http.HandlerFunc(ordersHttpEndpoints.CreateOrder())))
-	router.Methods("GET").Path("/orders").Handler(middleware.LoginMiddleware(http.HandlerFunc(ordersHttpEndpoints.ListOrder())))
+	router.Methods("POST").Path("/orders").HandlerFunc(middleware.LoginMiddleware(ordersHttpEndpoints.CreateOrder()))
+	router.Methods("GET").Path("/orders").HandlerFunc(middleware.LoginMiddleware(ordersHttpEndpoints.ListOrder()))
 	fmt.Println("server is running on port 8080")
 	http.ListenAndServe(":8080", router)
 }
