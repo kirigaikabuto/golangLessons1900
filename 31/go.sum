@@ -69,6 +69,8 @@ github.com/kirigaikabuto/orders31 v0.0.0-20210703131608-b4e0bec611fd h1:4HBU4Gtt
 github.com/kirigaikabuto/orders31 v0.0.0-20210703131608-b4e0bec611fd/go.mod h1:U6BZ3lXay1KhCvWxqa3ViVpCaaAn9ttuayw6OtxMOQ8=
 github.com/kirigaikabuto/products31 v0.0.0-20210703131756-6f90e3300975 h1:QiJNKVYDfuejiTakuek5ID1Nf+nzD/UFxvCvrURIns8=
 github.com/kirigaikabuto/products31 v0.0.0-20210703131756-6f90e3300975/go.mod h1:c4RNRUQsS/SlYLfY7+acz9+B600Z6jAtX8ETmVL5uFQ=
+github.com/kirigaikabuto/products31 v0.0.0-20210708113801-c62cd56628d2 h1:yp1U8aJXci5VseBR6m+UQZrzcfZxIaGHu8GlQ6bJRZk=
+github.com/kirigaikabuto/products31 v0.0.0-20210708113801-c62cd56628d2/go.mod h1:1dbb2+ixeP25EROiv57r5Rzh0g1y0naOBK3drkhwTFI=
 github.com/kirigaikabuto/start31 v0.0.0-20210703132345-cd8e759b955b h1:DEhoMo2vFhZWyuBVN+H9rVKfM6jsR1DMfPdsXG2bXLI=
 github.com/kirigaikabuto/start31 v0.0.0-20210703132345-cd8e759b955b/go.mod h1:ruQ/cBFXOenEKs83EiuFvN0/MrCLh8fHH6ID7aI1EWc=
 github.com/kirigaikabuto/start31 v0.0.0-20210706121328-5f67da897605 h1:JaR6qNc5x6KSB5kfYqnNApu+RgN5vy0JuR2McQGgQJY=
@@ -77,6 +79,8 @@ github.com/kirigaikabuto/start31 v0.0.0-20210706124512-29918d4994c7 h1:c8yDSQDd+
 github.com/kirigaikabuto/start31 v0.0.0-20210706124512-29918d4994c7/go.mod h1:RjTazz4H4ke2XgGJcxAgl8N46nEqizYJHjydcJMItaE=
 github.com/kirigaikabuto/start31 v0.0.0-20210706131858-d4826757c596 h1:wdKilYZIH/u/ZQtVvnGULLOSsihw3xhs/pmdm3Khtoo=
 github.com/kirigaikabuto/start31 v0.0.0-20210706131858-d4826757c596/go.mod h1:pXgKU2Bix0NEzF2pt2VjO2SZ3Dln8dH3Ub9Q6wQNXgw=
+github.com/kirigaikabuto/start31 v0.0.0-20210708114955-cf34eb52e2c7 h1:fAwQZrbZPPWMjlBvjR7JJ0vzX5tZw63hqKs/3O75bts=
+github.com/kirigaikabuto/start31 v0.0.0-20210708114955-cf34eb52e2c7/go.mod h1:4BIPFkhrSiIyRX4ZAPqEHQPzZTFZnOE6fDEYLIzWJ+Y=
 github.com/kirigaikabuto/users31 v0.0.0-20210703132012-2ed019bdffaf h1:IT2rhsCTtfNa766INpElBkYIJ0Guo4d5zV0K8u5m+TU=
 github.com/kirigaikabuto/users31 v0.0.0-20210703132012-2ed019bdffaf/go.mod h1:ayU1vuTRxZI1gfEL1TElTmeZxhFUGmJVPeX9ziT2Fwc=
 github.com/klauspost/compress v1.9.5 h1:U+CaK85mrNNb4k8BNOfgJtJ/gr6kswUCFj6miSzVC6M=

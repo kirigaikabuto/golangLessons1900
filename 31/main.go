@@ -7,14 +7,12 @@ import (
 	common "github.com/kirigaikabuto/common-lib31"
 	redis_lib "github.com/kirigaikabuto/common-lib31"
 	orders "github.com/kirigaikabuto/orders31"
-	products "github.com/kirigaikabuto/products31"
 	start "github.com/kirigaikabuto/start31"
 	"log"
 	"net/http"
 )
 
 func main() {
-
 
 	rabbitConfig := amqp.Config{
 		Host:     "localhost",
@@ -32,7 +30,6 @@ func main() {
 		panic(err)
 		return
 	}
-
 
 	redisStore, err := redis_lib.NewRedisConnectStore(common.RedisConfig{
 		Host: "localhost",
@@ -55,19 +52,8 @@ func main() {
 	router.Methods("GET").Path("/profile").HandlerFunc(middleware.LoginMiddleware(mainEndpoints.ProfileEndpoint()))
 
 	//products
-	productMongoStore, err := products.NewProductStore(common.MongoConfig{
-		Host:           "localhost",
-		Port:           "27017",
-		Database:       "ivi",
-		CollectionName: "products",
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	productHttpEndpoints := products.NewProductHttpEndpoints(productMongoStore)
-
-	router.Methods("POST").Path("/products").HandlerFunc(middleware.LoginMiddleware(productHttpEndpoints.CreateProduct()))
-	router.Methods("GET").Path("/products").HandlerFunc(middleware.LoginMiddleware(productHttpEndpoints.ListProduct()))
+	router.Methods("POST").Path("/product/create").HandlerFunc(middleware.LoginMiddleware(mainEndpoints.CreateProductEndpoint()))
+	router.Methods("GET").Path("/product/list").HandlerFunc(middleware.LoginMiddleware(mainEndpoints.ListProductEndpoint()))
 
 	ordersMongoStore, err := orders.NewOrdersStore(common.MongoConfig{
 		Host:           "localhost",
