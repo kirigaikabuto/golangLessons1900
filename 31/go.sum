@@ -67,6 +67,8 @@ github.com/kirigaikabuto/golangLessons1900/23 v0.0.0-20210628134031-99518c1565e6
 github.com/kirigaikabuto/golangLessons1900/23 v0.0.0-20210628134031-99518c1565e6/go.mod h1:HiG236MhsUar314vlrMsP2eQAyEo2TN0tBdPS217r+4=
 github.com/kirigaikabuto/orders31 v0.0.0-20210703131608-b4e0bec611fd h1:4HBU4Gttjos/Wpo9F3Te1WOeFzbFOvSK1vaDj8TFT7g=
 github.com/kirigaikabuto/orders31 v0.0.0-20210703131608-b4e0bec611fd/go.mod h1:U6BZ3lXay1KhCvWxqa3ViVpCaaAn9ttuayw6OtxMOQ8=
+github.com/kirigaikabuto/orders31 v0.0.0-20210708121146-5874b5a4900b h1:gmtSv97o/VuP/evGStZvK9owWA1BiVjWSHiK0KJBizU=
+github.com/kirigaikabuto/orders31 v0.0.0-20210708121146-5874b5a4900b/go.mod h1:nXEp77zxpf5Kn7ooxNaCVQMNyu2g+A/sFuZbXhOnDGA=
 github.com/kirigaikabuto/products31 v0.0.0-20210703131756-6f90e3300975 h1:QiJNKVYDfuejiTakuek5ID1Nf+nzD/UFxvCvrURIns8=
 github.com/kirigaikabuto/products31 v0.0.0-20210703131756-6f90e3300975/go.mod h1:c4RNRUQsS/SlYLfY7+acz9+B600Z6jAtX8ETmVL5uFQ=
 github.com/kirigaikabuto/products31 v0.0.0-20210708113801-c62cd56628d2 h1:yp1U8aJXci5VseBR6m+UQZrzcfZxIaGHu8GlQ6bJRZk=
@@ -85,6 +87,8 @@ github.com/kirigaikabuto/start31 v0.0.0-20210708115850-fc29f6bdf41d h1:/6uNg/IFg
 github.com/kirigaikabuto/start31 v0.0.0-20210708115850-fc29f6bdf41d/go.mod h1:MSP58u6ctHxrn5AGHJO9DOlBt/3O5/gi1XaBbH7qlB0=
 github.com/kirigaikabuto/start31 v0.0.0-20210708120034-6dd262a5d5c5 h1:MNkmqZpRQ40SFMIPPw/LYkR0U1fnkigVgayr2cUhJC4=
 github.com/kirigaikabuto/start31 v0.0.0-20210708120034-6dd262a5d5c5/go.mod h1:MSP58u6ctHxrn5AGHJO9DOlBt/3O5/gi1XaBbH7qlB0=
+github.com/kirigaikabuto/start31 v0.0.0-20210708121848-f96d04311b3e h1:OhuwEz8mJ4idtqwE7vmMHbJ9c24haJxWuloTQQVY5LA=
+github.com/kirigaikabuto/start31 v0.0.0-20210708121848-f96d04311b3e/go.mod h1:w2CgBX/gSucfy7tj+7y0efnrJPPYtrXEvyBAzX/RyFE=
 github.com/kirigaikabuto/users31 v0.0.0-20210703132012-2ed019bdffaf h1:IT2rhsCTtfNa766INpElBkYIJ0Guo4d5zV0K8u5m+TU=
 github.com/kirigaikabuto/users31 v0.0.0-20210703132012-2ed019bdffaf/go.mod h1:ayU1vuTRxZI1gfEL1TElTmeZxhFUGmJVPeX9ziT2Fwc=
 github.com/klauspost/compress v1.9.5 h1:U+CaK85mrNNb4k8BNOfgJtJ/gr6kswUCFj6miSzVC6M=

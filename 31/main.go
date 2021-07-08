@@ -6,7 +6,6 @@ import (
 	"github.com/gorilla/mux"
 	common "github.com/kirigaikabuto/common-lib31"
 	redis_lib "github.com/kirigaikabuto/common-lib31"
-	orders "github.com/kirigaikabuto/orders31"
 	start "github.com/kirigaikabuto/start31"
 	"log"
 	"net/http"
@@ -55,19 +54,9 @@ func main() {
 	router.Methods("POST").Path("/product/create").HandlerFunc(middleware.LoginMiddleware(mainEndpoints.CreateProductEndpoint()))
 	router.Methods("GET").Path("/product/list").HandlerFunc(middleware.LoginMiddleware(mainEndpoints.ListProductEndpoint()))
 
-	ordersMongoStore, err := orders.NewOrdersStore(common.MongoConfig{
-		Host:           "localhost",
-		Port:           "27017",
-		Database:       "ivi",
-		CollectionName: "orders",
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	ordersHttpEndpoints := orders.NewOrderHttpEndpoints(ordersMongoStore)
 
-	router.Methods("POST").Path("/orders").HandlerFunc(middleware.LoginMiddleware(ordersHttpEndpoints.CreateOrder()))
-	router.Methods("GET").Path("/orders").HandlerFunc(middleware.LoginMiddleware(ordersHttpEndpoints.ListOrder()))
+	router.Methods("POST").Path("/orders/create").HandlerFunc(middleware.LoginMiddleware(mainEndpoints.CreateOrder()))
+	router.Methods("GET").Path("/orders/list").HandlerFunc(middleware.LoginMiddleware(mainEndpoints.ListOrder()))
 	fmt.Println("server is running on port 8080")
 	http.ListenAndServe(":8080", router)
 }
