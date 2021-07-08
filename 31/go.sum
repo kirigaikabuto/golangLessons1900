@@ -89,6 +89,8 @@ github.com/kirigaikabuto/start31 v0.0.0-20210708120034-6dd262a5d5c5 h1:MNkmqZpRQ
 github.com/kirigaikabuto/start31 v0.0.0-20210708120034-6dd262a5d5c5/go.mod h1:MSP58u6ctHxrn5AGHJO9DOlBt/3O5/gi1XaBbH7qlB0=
 github.com/kirigaikabuto/start31 v0.0.0-20210708121848-f96d04311b3e h1:OhuwEz8mJ4idtqwE7vmMHbJ9c24haJxWuloTQQVY5LA=
 github.com/kirigaikabuto/start31 v0.0.0-20210708121848-f96d04311b3e/go.mod h1:w2CgBX/gSucfy7tj+7y0efnrJPPYtrXEvyBAzX/RyFE=
+github.com/kirigaikabuto/start31 v0.0.0-20210708122334-5a5b0f4f782e h1:6Kj2I0OWvkhLRMlD996hh2eYy/oY0Mo06adGqwXsldk=
+github.com/kirigaikabuto/start31 v0.0.0-20210708122334-5a5b0f4f782e/go.mod h1:w2CgBX/gSucfy7tj+7y0efnrJPPYtrXEvyBAzX/RyFE=
 github.com/kirigaikabuto/users31 v0.0.0-20210703132012-2ed019bdffaf h1:IT2rhsCTtfNa766INpElBkYIJ0Guo4d5zV0K8u5m+TU=
 github.com/kirigaikabuto/users31 v0.0.0-20210703132012-2ed019bdffaf/go.mod h1:ayU1vuTRxZI1gfEL1TElTmeZxhFUGmJVPeX9ziT2Fwc=
 github.com/klauspost/compress v1.9.5 h1:U+CaK85mrNNb4k8BNOfgJtJ/gr6kswUCFj6miSzVC6M=
